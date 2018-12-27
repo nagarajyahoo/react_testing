@@ -26,13 +26,16 @@ describe('Integration tests', () => {
         //click on the button to fetch the comments
         wrapper.find('.fetch-comments-btn').simulate('click');
 
-        //verify the results
-        setTimeout(() => {
+        //this is for async
+        moxios.wait(() => {
+            //update to reflect the chnages on UI
             wrapper.update();
+
+            //assert the values
             expect(wrapper.find('li').length).toEqual(2);
 
-            //tell JEST that we are done
+            //tell JEST we are done
             done();
-        }, 100);
+        });
     });
 });
